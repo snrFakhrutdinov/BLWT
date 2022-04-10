@@ -25,8 +25,14 @@ struct AuthMainUI_Previews: PreviewProvider {
 }
 
 struct SwipedRegBody: View{
-    var register = Register()
-    @ObservedObject var props = Properties()
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(sortDescriptors: []) var users: FetchedResults<Users>
+    
+    @State var loginRegContainer:String = ""
+    @State var emailRegContainer:String = ""
+    @State var passwordRegContainer:String = ""
+    @State var confirmRegContainer:String = ""
+    
     var body: some View{
         ZStack(){
             RoundedRectangle(cornerRadius: 13)
@@ -38,18 +44,100 @@ struct SwipedRegBody: View{
                     .fontWeight(.bold)
                     .frame(width: 390, height: 24, alignment: .center)
                     .foregroundColor(Color.green)
-                VStack(spacing: 24){
-                    SwipedViewCell(fieldName: "Username", container: props.fstRegContainer)
-                    SwipedViewCell(fieldName: "Email", container: props.fstRegContainer)
-                    SwipedViewCell(fieldName: "Password", container: props.fstRegContainer)
-                    SwipedViewCell(fieldName: "Confirm Password", container: props.fstRegContainer)
+                VStack(spacing: 48){
+                    VStack(spacing: 4){
+                        Text("Login")
+                            .fontWeight(.semibold)
+                            .frame(width: 320, height: 24, alignment: .leading)
+                            .foregroundColor(Color.green)
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 8)
+                                .frame(width: 320, height: 24, alignment: .leading)
+                                .foregroundColor(Color.gray)
+                            TextField(text: $loginRegContainer, label: {
+                                Text("Enter")
+                            })
+                            .frame(width: 320, height: 24, alignment: .leading)
+                        }
+                        VStack(spacing: 0){
+                            Text("Email")
+                                .fontWeight(.semibold)
+                                .frame(width: 320, height: 24, alignment: .leading)
+                                .foregroundColor(Color.green)
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 8)
+                                    .frame(width: 320, height: 24, alignment: .leading)
+                                    .foregroundColor(Color.gray)
+                                TextField(text: $emailRegContainer, label: {
+                                    Text("Enter")
+                                })
+                                .frame(width: 320, height: 24, alignment: .leading)
+                            }
+                            
+                        }
+                        VStack(spacing: 0){
+                            Text("Password")
+                                .fontWeight(.semibold)
+                                .frame(width: 320, height: 24, alignment: .leading)
+                                .foregroundColor(Color.green)
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 8)
+                                    .frame(width: 320, height: 24, alignment: .leading)
+                                    .foregroundColor(Color.gray)
+                                TextField(text: $passwordRegContainer, label: {
+                                    Text("Enter")
+                                })
+                                .frame(width: 320, height: 24, alignment: .leading)
+                            }
+                            
+                        }
+                        VStack(spacing: 0){
+                            Text("Confirm Password")
+                                .fontWeight(.semibold)
+                                .frame(width: 320, height: 24, alignment: .leading)
+                                .foregroundColor(Color.green)
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 8)
+                                    .frame(width: 320, height: 24, alignment: .leading)
+                                    .foregroundColor(Color.gray)
+                                TextField(text: $confirmRegContainer, label: {
+                                    Text("Enter")
+                                })
+                                .frame(width: 320, height: 24, alignment: .leading)
+                            }
+                            
+                        }
+                        
+                    }
                 }
                 ZStack{
                     RoundedRectangle(cornerRadius: 13)
                         .foregroundColor(Color.green)
                         .frame(width: 320, height: 24, alignment: .leading)
+                    //add A Navigation link here
                     Button(action: {
-                        register.registerUser()
+                        for userInDB in users {
+                            if userInDB.login == loginRegContainer{
+                                print(loginRegContainer)
+                                print("a")
+                                return
+                            }
+                        }
+                        if passwordRegContainer != confirmRegContainer {
+                            print("b")
+                            return
+                        }
+                        do{
+                            let newUser = Users(context: moc)
+                            newUser.login = loginRegContainer
+                            newUser.email = emailRegContainer
+                            newUser.password = passwordRegContainer
+                            newUser.id = UUID()
+                            try moc.save()
+                            print("newUser is added")
+                        } catch{
+                            print(error)
+                        }
                     }, label: {
                         Text("Register")
                             .foregroundColor(Color.white)
@@ -59,8 +147,14 @@ struct SwipedRegBody: View{
         }
     }
 }
+
 struct SwipedLogBody: View{
-    @ObservedObject var props = Properties()
+    @State var firstLogContainer: String = ""
+    @State var secondLogContainer: String = ""
+    
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(sortDescriptors: []) var users: FetchedResults<Users>
+    
     var body: some View{
         ZStack(){
             RoundedRectangle(cornerRadius: 13)
@@ -72,16 +166,50 @@ struct SwipedLogBody: View{
                     .fontWeight(.bold)
                     .frame(width: 390, height: 24, alignment: .center)
                     .foregroundColor(Color.green)
-                VStack(spacing: 24){
-                    SwipedViewCell(fieldName: "Login", container: props.fstRegContainer)
-                    SwipedViewCell(fieldName: "Password", container: props.fstRegContainer)
+                VStack(spacing: 8){
+                    VStack(spacing: 0){
+                        Text("Login")
+                            .fontWeight(.semibold)
+                            .frame(width: 320, height: 24, alignment: .leading)
+                            .foregroundColor(Color.green)
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 8)
+                                .frame(width: 320, height: 24, alignment: .leading)
+                                .foregroundColor(Color.gray)
+                            TextField(text: $firstLogContainer, label: {
+                                Text("Enter")
+                            })
+                            .frame(width: 320, height: 24, alignment: .leading)
+                        }
+                        
+                    }
+                    VStack(spacing: 0){
+                        Text("Password")
+                            .fontWeight(.semibold)
+                            .frame(width: 320, height: 24, alignment: .leading)
+                            .foregroundColor(Color.green)
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 8)
+                                .frame(width: 320, height: 24, alignment: .leading)
+                                .foregroundColor(Color.gray)
+                            TextField(text: $secondLogContainer, label: {
+                                Text("Enter")
+                            })
+                            .frame(width: 320, height: 24, alignment: .leading)
+                        }
+                        
+                    }
                 }
                 ZStack{
                     RoundedRectangle(cornerRadius: 13)
                         .foregroundColor(Color.green)
                         .frame(width: 320, height: 24, alignment: .leading)
                     Button(action: {
-                        print("a")
+                        for userInDB in users{
+                            if userInDB.login == firstLogContainer && userInDB.password == secondLogContainer{
+                                print("Logged")
+                            }
+                        }
                     }, label: {
                         Text("Register")
                             .foregroundColor(Color.white)
@@ -92,37 +220,12 @@ struct SwipedLogBody: View{
     }
 }
 
-struct SwipedViewCell: View{
-    var fieldName: String
-    @State var container: String
-    var body: some View{
-        VStack(spacing: 0){
-            Text(fieldName)
-                .fontWeight(.semibold)
-                .frame(width: 320, height: 24, alignment: .leading)
-                .foregroundColor(Color.green)
-            ZStack{
-                TextField(text: $container, label: {
-                    Text("")
-                })
-                .frame(width: 320, height: 24, alignment: .leading)
-                RoundedRectangle(cornerRadius: 8)
-                    .frame(width: 320, height: 24, alignment: .leading)
-                    .foregroundColor(Color.gray)
-            }
-        }
-    }
-}
 
 struct MainBody: View{
-    @State var swipedIndex: Int = 0
     var body: some View{
         TabView{
             SwipedRegBody()
-                .tag(0)
             SwipedLogBody()
-                .tag(1)
-        }
-        .tabViewStyle(.page(indexDisplayMode: .never))
+        }.tabViewStyle(.page(indexDisplayMode: .never))
     }
 }

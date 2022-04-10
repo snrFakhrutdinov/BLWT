@@ -16,11 +16,8 @@
 		7D76D2982801E61300C5746D /* BLWTUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D76D2972801E61300C5746D /* BLWTUITestsLaunchTests.swift */; };
 		7D76D2A92801E8D700C5746D /* AuthMainUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D76D2A82801E8D700C5746D /* AuthMainUI.swift */; };
 		7D76D2AC2801E94200C5746D /* ColorLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D76D2AB2801E94200C5746D /* ColorLibrary.swift */; };
-		7D76D2AF2801EE5200C5746D /* ObservedProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D76D2AE2801EE5200C5746D /* ObservedProperties.swift */; };
 		7D76D2B52801FBFD00C5746D /* BDController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D76D2B42801FBFD00C5746D /* BDController.swift */; };
 		7D76D2BC2801FD1700C5746D /* UsersDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D76D2BA2801FD1700C5746D /* UsersDB.xcdatamodeld */; };
-		7D76D2BE280200D900C5746D /* RegisterLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D76D2BD280200D900C5746D /* RegisterLogic.swift */; };
-		7D76D2C1280202FC00C5746D /* BDList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D76D2C0280202FC00C5746D /* BDList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,11 +50,8 @@
 		7D76D2972801E61300C5746D /* BLWTUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLWTUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7D76D2A82801E8D700C5746D /* AuthMainUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMainUI.swift; sourceTree = "<group>"; };
 		7D76D2AB2801E94200C5746D /* ColorLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorLibrary.swift; sourceTree = "<group>"; };
-		7D76D2AE2801EE5200C5746D /* ObservedProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservedProperties.swift; sourceTree = "<group>"; };
 		7D76D2B42801FBFD00C5746D /* BDController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDController.swift; sourceTree = "<group>"; };
 		7D76D2BB2801FD1700C5746D /* UsersDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UsersDB.xcdatamodel; sourceTree = "<group>"; };
-		7D76D2BD280200D900C5746D /* RegisterLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLogic.swift; sourceTree = "<group>"; };
-		7D76D2C0280202FC00C5746D /* BDList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +102,6 @@
 		7D76D2792801E60F00C5746D /* BLWT */ = {
 			isa = PBXGroup;
 			children = (
-				7D76D2BF280202E600C5746D /* Tests */,
 				7D76D2B32801FBE200C5746D /* CoreData */,
 				7D76D2B22801FB7B00C5746D /* Authorization */,
 				7D76D2B02801F19C00C5746D /* Library */,
@@ -148,7 +141,6 @@
 			isa = PBXGroup;
 			children = (
 				7D76D2AB2801E94200C5746D /* ColorLibrary.swift */,
-				7D76D2AE2801EE5200C5746D /* ObservedProperties.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -166,7 +158,6 @@
 			isa = PBXGroup;
 			children = (
 				7D76D2A82801E8D700C5746D /* AuthMainUI.swift */,
-				7D76D2BD280200D900C5746D /* RegisterLogic.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -178,14 +169,6 @@
 				7D76D2B42801FBFD00C5746D /* BDController.swift */,
 			);
 			path = CoreData;
-			sourceTree = "<group>";
-		};
-		7D76D2BF280202E600C5746D /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				7D76D2C0280202FC00C5746D /* BDList.swift */,
-			);
-			path = Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,12 +302,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D76D27D2801E60F00C5746D /* ContentView.swift in Sources */,
-				7D76D2BE280200D900C5746D /* RegisterLogic.swift in Sources */,
 				7D76D2B52801FBFD00C5746D /* BDController.swift in Sources */,
-				7D76D2AF2801EE5200C5746D /* ObservedProperties.swift in Sources */,
 				7D76D2BC2801FD1700C5746D /* UsersDB.xcdatamodeld in Sources */,
 				7D76D2AC2801E94200C5746D /* ColorLibrary.swift in Sources */,
-				7D76D2C1280202FC00C5746D /* BDList.swift in Sources */,
 				7D76D2A92801E8D700C5746D /* AuthMainUI.swift in Sources */,
 				7D76D27B2801E60F00C5746D /* BLWTApp.swift in Sources */,
 			);

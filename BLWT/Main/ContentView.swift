@@ -11,7 +11,6 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             NavigationLink(destination: AuthMainUI(), label: {Text("Registration")} )
-            NavigationLink(destination: BDList(), label: {Text("Users")} )
         }
     }
 }
