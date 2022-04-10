@@ -18,6 +18,7 @@
 		7D76D2AC2801E94200C5746D /* ColorLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D76D2AB2801E94200C5746D /* ColorLibrary.swift */; };
 		7D76D2B52801FBFD00C5746D /* BDController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D76D2B42801FBFD00C5746D /* BDController.swift */; };
 		7D76D2BC2801FD1700C5746D /* UsersDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D76D2BA2801FD1700C5746D /* UsersDB.xcdatamodeld */; };
+		7D980F03280349D900724CE3 /* UserDBList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D980F02280349D900724CE3 /* UserDBList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		7D76D2AB2801E94200C5746D /* ColorLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorLibrary.swift; sourceTree = "<group>"; };
 		7D76D2B42801FBFD00C5746D /* BDController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDController.swift; sourceTree = "<group>"; };
 		7D76D2BB2801FD1700C5746D /* UsersDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UsersDB.xcdatamodel; sourceTree = "<group>"; };
+		7D980F02280349D900724CE3 /* UserDBList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDBList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				7D76D2A82801E8D700C5746D /* AuthMainUI.swift */,
+				7D980F02280349D900724CE3 /* UserDBList.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D980F03280349D900724CE3 /* UserDBList.swift in Sources */,
 				7D76D27D2801E60F00C5746D /* ContentView.swift in Sources */,
 				7D76D2B52801FBFD00C5746D /* BDController.swift in Sources */,
 				7D76D2BC2801FD1700C5746D /* UsersDB.xcdatamodeld in Sources */,
