@@ -9,12 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        NavigationView{
-            VStack{
-                NavigationLink(destination: AuthMainUI(), label: {Text("Registration")} )
-                NavigationLink(destination: UserDBList(), label: {Text("Users")} )
-            }
-        }
+        AuthMainUI()
     }
 }
 

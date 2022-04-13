@@ -155,67 +155,76 @@ struct SwipedLogBody: View{
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: []) var users: FetchedResults<Users>
     
+    @ObservedObject var data = UserData()
+    @State var isLoggined: Bool = false
+    
     var body: some View{
-        ZStack(){
-            RoundedRectangle(cornerRadius: 13)
-                .foregroundColor(Color.black)
-                .frame(width: 342, height: 496, alignment: .center)
-            VStack(spacing: 145){
-                Text("BLWT")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .frame(width: 390, height: 24, alignment: .center)
-                    .foregroundColor(Color.green)
-                VStack(spacing: 8){
-                    VStack(spacing: 0){
-                        Text("Login")
-                            .fontWeight(.semibold)
-                            .frame(width: 320, height: 24, alignment: .leading)
-                            .foregroundColor(Color.green)
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 8)
-                                .frame(width: 320, height: 24, alignment: .leading)
-                                .foregroundColor(Color.gray)
-                            TextField(text: $firstLogContainer, label: {
-                                Text("Enter")
-                            })
-                            .frame(width: 320, height: 24, alignment: .leading)
-                        }
-                        
-                    }
-                    VStack(spacing: 0){
-                        Text("Password")
-                            .fontWeight(.semibold)
-                            .frame(width: 320, height: 24, alignment: .leading)
-                            .foregroundColor(Color.green)
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 8)
-                                .frame(width: 320, height: 24, alignment: .leading)
-                                .foregroundColor(Color.gray)
-                            TextField(text: $secondLogContainer, label: {
-                                Text("Enter")
-                            })
-                            .frame(width: 320, height: 24, alignment: .leading)
-                        }
-                        
-                    }
-                }
-                ZStack{
-                    RoundedRectangle(cornerRadius: 13)
+        NavigationView{
+            ZStack(){
+                RoundedRectangle(cornerRadius: 13)
+                    .foregroundColor(Color.black)
+                    .frame(width: 342, height: 496, alignment: .center)
+                VStack(spacing: 145){
+                    Text("BLWT")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .frame(width: 390, height: 24, alignment: .center)
                         .foregroundColor(Color.green)
-                        .frame(width: 320, height: 24, alignment: .leading)
-                    Button(action: {
-                        for userInDB in users{
-                            if userInDB.login == firstLogContainer && userInDB.password == secondLogContainer{
-                                print("Logged")
+                    VStack(spacing: 8){
+                        VStack(spacing: 0){
+                            Text("Login")
+                                .fontWeight(.semibold)
+                                .frame(width: 320, height: 24, alignment: .leading)
+                                .foregroundColor(Color.green)
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 8)
+                                    .frame(width: 320, height: 24, alignment: .leading)
+                                    .foregroundColor(Color.gray)
+                                TextField(text: $firstLogContainer, label: {
+                                    Text("Enter")
+                                })
+                                .frame(width: 320, height: 24, alignment: .leading)
                             }
+                            
                         }
-                    }, label: {
-                        Text("Register")
-                            .foregroundColor(Color.white)
-                    })
+                        VStack(spacing: 0){
+                            Text("Password")
+                                .fontWeight(.semibold)
+                                .frame(width: 320, height: 24, alignment: .leading)
+                                .foregroundColor(Color.green)
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 8)
+                                    .frame(width: 320, height: 24, alignment: .leading)
+                                    .foregroundColor(Color.gray)
+                                TextField(text: $secondLogContainer, label: {
+                                    Text("Enter")
+                                })
+                                .frame(width: 320, height: 24, alignment: .leading)
+                            }
+                            
+                        }
+                    }
+                    ZStack{
+                        RoundedRectangle(cornerRadius: 13)
+                            .foregroundColor(Color.green)
+                            .frame(width: 320, height: 24, alignment: .leading)
+                        NavigationLink(destination: UserMainUI(), isActive: $isLoggined){ EmptyView() }
+                        Button(action: {
+                            for userInDB in users{
+                                if userInDB.login == firstLogContainer && userInDB.password == secondLogContainer{
+                                    print("Logged")
+                                    data.name = firstLogContainer
+                                    isLoggined = true
+                                }
+                            }
+                        }, label: {
+                            Text("Register")
+                                .foregroundColor(Color.white)
+                        })
+                    }
                 }
             }
+            .navigationTitle("Login")
         }
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D1C20352804744400640C2E /* UserMainUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C20342804744400640C2E /* UserMainUI.swift */; };
 		7D76D27B2801E60F00C5746D /* BLWTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D76D27A2801E60F00C5746D /* BLWTApp.swift */; };
 		7D76D27D2801E60F00C5746D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D76D27C2801E60F00C5746D /* ContentView.swift */; };
 		7D76D27F2801E61200C5746D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D76D27E2801E61200C5746D /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 		7D76D2AC2801E94200C5746D /* ColorLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D76D2AB2801E94200C5746D /* ColorLibrary.swift */; };
 		7D76D2B52801FBFD00C5746D /* BDController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D76D2B42801FBFD00C5746D /* BDController.swift */; };
 		7D76D2BC2801FD1700C5746D /* UsersDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D76D2BA2801FD1700C5746D /* UsersDB.xcdatamodeld */; };
+		7D8B92132805B90B00B69BE1 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8B92122805B90B00B69BE1 /* CurrentUser.swift */; };
 		7D980F03280349D900724CE3 /* UserDBList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D980F02280349D900724CE3 /* UserDBList.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7D1C20342804744400640C2E /* UserMainUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMainUI.swift; sourceTree = "<group>"; };
 		7D76D2772801E60F00C5746D /* BLWT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLWT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D76D27A2801E60F00C5746D /* BLWTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLWTApp.swift; sourceTree = "<group>"; };
 		7D76D27C2801E60F00C5746D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,6 +56,7 @@
 		7D76D2AB2801E94200C5746D /* ColorLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorLibrary.swift; sourceTree = "<group>"; };
 		7D76D2B42801FBFD00C5746D /* BDController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDController.swift; sourceTree = "<group>"; };
 		7D76D2BB2801FD1700C5746D /* UsersDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UsersDB.xcdatamodel; sourceTree = "<group>"; };
+		7D8B92122805B90B00B69BE1 /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		7D980F02280349D900724CE3 /* UserDBList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDBList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -143,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				7D76D2AB2801E94200C5746D /* ColorLibrary.swift */,
+				7D8B92122805B90B00B69BE1 /* CurrentUser.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -152,6 +157,7 @@
 			children = (
 				7D76D27A2801E60F00C5746D /* BLWTApp.swift */,
 				7D76D27C2801E60F00C5746D /* ContentView.swift */,
+				7D1C20342804744400640C2E /* UserMainUI.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -309,7 +315,9 @@
 				7D76D2B52801FBFD00C5746D /* BDController.swift in Sources */,
 				7D76D2BC2801FD1700C5746D /* UsersDB.xcdatamodeld in Sources */,
 				7D76D2AC2801E94200C5746D /* ColorLibrary.swift in Sources */,
+				7D1C20352804744400640C2E /* UserMainUI.swift in Sources */,
 				7D76D2A92801E8D700C5746D /* AuthMainUI.swift in Sources */,
+				7D8B92132805B90B00B69BE1 /* CurrentUser.swift in Sources */,
 				7D76D27B2801E60F00C5746D /* BLWTApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
