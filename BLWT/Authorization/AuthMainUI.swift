@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct AuthMainUI: View {
     var body: some View {
@@ -13,7 +14,7 @@ struct AuthMainUI: View {
             RoundedRectangle(cornerRadius: 0)
                 .edgesIgnoringSafeArea(.all)
                 .foregroundColor(Color.gray)
-            MainBody()
+                MainBody()
         }
     }
 }
@@ -38,27 +39,34 @@ struct SwipedRegBody: View{
     var body: some View{
         NavigationView{
             ZStack(){
+                RoundedRectangle(cornerRadius: 0)
+                    .foregroundColor(CurrentCorols.gray)
+                    .edgesIgnoringSafeArea(.all)
+                RoundedRectangle(cornerRadius: 13)
+                    .frame(width: 342, height: 475, alignment: .center)
                 VStack(spacing: 72){
                     Text("BLWT")
                         .font(.title2)
                         .fontWeight(.bold)
                         .frame(width: 390, height: 24, alignment: .center)
-                        .foregroundColor(Color.green)
+                        .foregroundColor(CurrentCorols.green)
                     VStack(spacing: 48){
                         VStack(spacing: 4){
                             Text("Login")
                                 .fontWeight(.semibold)
                                 .frame(width: 320, height: 24, alignment: .leading)
-                                .foregroundColor(Color.green)
+                                .foregroundColor(CurrentCorols.green)
                             ZStack{
                                 RoundedRectangle(cornerRadius: 8)
                                     .frame(width: 320, height: 24, alignment: .leading)
-                                    .foregroundColor(Color.gray)
+                                    .foregroundColor(CurrentCorols.gray)
                                 TextField(text: $loginRegContainer, label: {
                                     Text("")
                                 })
                                 .placeholder(when: loginRegContainer.isEmpty, placeholder: {
-                                    Text("Enter here...").foregroundColor(Color.green)
+                                    Text("Enter here...")
+                                        .foregroundColor(CurrentCorols.green)
+                                        .frame(width: 325, height: 20, alignment: .center)
                                 })
                                 .frame(width: 320, height: 24, alignment: .leading)
                             }
@@ -66,16 +74,18 @@ struct SwipedRegBody: View{
                                 Text("Email")
                                     .fontWeight(.semibold)
                                     .frame(width: 320, height: 24, alignment: .leading)
-                                    .foregroundColor(Color.green)
+                                    .foregroundColor(CurrentCorols.green)
                                 ZStack{
                                     RoundedRectangle(cornerRadius: 8)
                                         .frame(width: 320, height: 24, alignment: .leading)
-                                        .foregroundColor(Color.gray)
+                                        .foregroundColor(CurrentCorols.gray)
                                     TextField(text: $emailRegContainer, label: {
                                         Text("")
                                     })
                                     .placeholder(when: emailRegContainer.isEmpty, placeholder: {
-                                        Text("Enter here...").foregroundColor(Color.green)
+                                        Text("Enter here...")
+                                            .foregroundColor(CurrentCorols.green)
+                                            .frame(width: 325, height: 20, alignment: .center)
                                     })
                                     .frame(width: 320, height: 24, alignment: .leading)
                                 }
@@ -85,15 +95,17 @@ struct SwipedRegBody: View{
                                 Text("Password")
                                     .fontWeight(.semibold)
                                     .frame(width: 320, height: 24, alignment: .leading)
-                                    .foregroundColor(Color.green)
+                                    .foregroundColor(CurrentCorols.green)
                                 ZStack{
                                     RoundedRectangle(cornerRadius: 8)
                                         .frame(width: 320, height: 24, alignment: .leading)
-                                        .foregroundColor(Color.gray)
+                                        .foregroundColor(CurrentCorols.gray)
                                     TextField(text: $passwordRegContainer, label: {
                                         Text("")
                                     })                                .placeholder(when: passwordRegContainer.isEmpty, placeholder: {
-                                        Text("Enter here...").foregroundColor(Color.green)
+                                        Text("Enter here...")
+                                            .foregroundColor(CurrentCorols.green)
+                                            .frame(width: 325, height: 20, alignment: .center)
                                     })
                                     .frame(width: 320, height: 24, alignment: .leading)
                                 }
@@ -103,16 +115,18 @@ struct SwipedRegBody: View{
                                 Text("Confirm Password")
                                     .fontWeight(.semibold)
                                     .frame(width: 320, height: 24, alignment: .leading)
-                                    .foregroundColor(Color.green)
+                                    .foregroundColor(CurrentCorols.green)
                                 ZStack{
                                     RoundedRectangle(cornerRadius: 8)
                                         .frame(width: 320, height: 24, alignment: .leading)
-                                        .foregroundColor(Color.gray)
+                                        .foregroundColor(CurrentCorols.gray)
                                     TextField(text: $confirmRegContainer, label: {
                                         Text("")
                                     })
                                     .placeholder(when: confirmRegContainer.isEmpty, placeholder: {
-                                        Text("Enter here...").foregroundColor(Color.green)
+                                        Text("Enter here...")
+                                            .foregroundColor(CurrentCorols.green)
+                                            .frame(width: 325, height: 20, alignment: .center)
                                     })
                                     .frame(width: 320, height: 24, alignment: .leading)
                                 }
@@ -123,9 +137,10 @@ struct SwipedRegBody: View{
                     }
                     ZStack{
                         RoundedRectangle(cornerRadius: 13)
-                            .foregroundColor(Color.green)
+                            .foregroundColor(CurrentCorols.green)
                             .frame(width: 320, height: 24, alignment: .leading)
                         //add A Navigation link here
+                        NavigationLink(destination: UserMainUI(), isActive: $isRegistered){EmptyView()}
                         Button(action: {
                             for userInDB in users {
                                 if userInDB.login == loginRegContainer{
@@ -146,7 +161,6 @@ struct SwipedRegBody: View{
                                 newUser.id = UUID()
                                 try moc.save()
                                 isRegistered = true
-                                NavigationLink(destination: UserMainUI(), isActive: $isRegistered){EmptyView()}
                                 print("newUser is added")
                             } catch{
                                 print(error)
@@ -154,6 +168,7 @@ struct SwipedRegBody: View{
                         }, label: {
                             Text("Register")
                                 .foregroundColor(Color.white)
+                                .fontWeight(.bold)
                         })
                     }
                 }
@@ -175,24 +190,34 @@ struct SwipedLogBody: View{
     var body: some View{
         NavigationView{
             ZStack(){
+                RoundedRectangle(cornerRadius: 0)
+                    .foregroundColor(CurrentCorols.gray)
+                    .edgesIgnoringSafeArea(.all)
+                RoundedRectangle(cornerRadius: 8)
+                    .frame(width: 342, height: 496, alignment: .center)
                 VStack(spacing: 145){
                     Text("BLWT")
                         .font(.title2)
                         .fontWeight(.bold)
                         .frame(width: 390, height: 24, alignment: .center)
-                        .foregroundColor(Color.green)
+                        .foregroundColor(CurrentCorols.green)
                     VStack(spacing: 8){
                         VStack(spacing: 0){
                             Text("Login")
                                 .fontWeight(.semibold)
                                 .frame(width: 320, height: 24, alignment: .leading)
-                                .foregroundColor(Color.green)
+                                .foregroundColor(CurrentCorols.green)
                             ZStack{
                                 RoundedRectangle(cornerRadius: 8)
                                     .frame(width: 320, height: 24, alignment: .leading)
-                                    .foregroundColor(Color.gray)
+                                    .foregroundColor(CurrentCorols.gray)
                                 TextField(text: $firstLogContainer, label: {
-                                    Text("Enter")
+                                    Text("")
+                                })
+                                .placeholder(when: firstLogContainer.isEmpty, placeholder: {
+                                    Text("Enter here...")
+                                        .foregroundColor(CurrentCorols.green)
+                                        .frame(width: 325, height: 20, alignment: .center)
                                 })
                                 .frame(width: 320, height: 24, alignment: .leading)
                             }
@@ -202,13 +227,18 @@ struct SwipedLogBody: View{
                             Text("Password")
                                 .fontWeight(.semibold)
                                 .frame(width: 320, height: 24, alignment: .leading)
-                                .foregroundColor(Color.green)
+                                .foregroundColor(CurrentCorols.green)
                             ZStack{
                                 RoundedRectangle(cornerRadius: 8)
                                     .frame(width: 320, height: 24, alignment: .leading)
-                                    .foregroundColor(Color.gray)
+                                    .foregroundColor(CurrentCorols.gray)
                                 TextField(text: $secondLogContainer, label: {
-                                    Text("Enter")
+                                    Text("")
+                                })
+                                .placeholder(when: secondLogContainer.isEmpty, placeholder: {
+                                    Text("Enter here...")
+                                        .foregroundColor(CurrentCorols.green)
+                                        .frame(width: 325, height: 20, alignment: .center)
                                 })
                                 .frame(width: 320, height: 24, alignment: .leading)
                             }
@@ -217,7 +247,7 @@ struct SwipedLogBody: View{
                     }
                     ZStack{
                         RoundedRectangle(cornerRadius: 13)
-                            .foregroundColor(Color.green)
+                            .foregroundColor(CurrentCorols.green)
                             .frame(width: 320, height: 24, alignment: .leading)
                         NavigationLink(destination: UserMainUI(), isActive: $isLoggined){ EmptyView() }
                         Button(action: {
@@ -229,34 +259,43 @@ struct SwipedLogBody: View{
                                 }
                             }
                         }, label: {
-                            Text("Register")
+                            Text("Login")
                                 .foregroundColor(Color.white)
+                                .fontWeight(.bold)
                         })
                     }
                 }
             }
-            .navigationTitle("Login")
         }
     }
 }
 
 
 struct MainBody: View{
+    
+    init(){
+        UITabBar.appearance().backgroundColor = UIColor(Color.black)
+    }
+    
     var body: some View{
-        TabView{
-            SwipedRegBody()
-                .tabItem{
-                    Image(systemName: "person.crop.circle.fill.badge.plus")
+                TabView{
+                    SwipedRegBody()
+                        .tabItem{
+                            Image(systemName: "person.crop.circle.fill.badge.plus")
+                                .font(.system(size: 50))
+                        }
+                    SwipedLogBody()
+                        .tabItem{
+                            Image(systemName: "person.crop.circle.badge.questionmark.fill")
+                                .font(.system(size: 50))
+                        }
                 }
-            SwipedLogBody()
-                .tabItem{
-                    Image(systemName: "person.crop.circle.badge.questionmark.fill")
-                }
-        }
+                .accentColor(CurrentCorols.green)
+                .shadow(radius: 10)
     }
 }
-	
-	
+
+
 extension View {
     func placeholder<Content: View>(
         when shouldShow: Bool,

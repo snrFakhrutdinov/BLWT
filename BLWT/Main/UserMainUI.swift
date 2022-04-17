@@ -11,7 +11,10 @@ import UIKit
 struct UserMainUI: View {
     @ObservedObject var data = UserData()
     var body: some View {
-        HeaderUI()
+        ZStack{
+            HeaderUI()
+            UserUIMainBody()
+        }
     }
 }
 
@@ -88,5 +91,11 @@ struct UserUIMainBody: View{
                 }
         }
         .accentColor(.green)
+    }
+}
+struct ChatMenu: View{
+    var body: some View{
+        RoundedRectangle(cornerRadius: 8)
+            .frame(width: 390, height: 80, alignment: .center)
     }
 }
