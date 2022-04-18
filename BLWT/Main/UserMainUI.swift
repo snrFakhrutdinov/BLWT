@@ -12,8 +12,8 @@ struct UserMainUI: View {
     @ObservedObject var data = UserData()
     var body: some View {
         ZStack{
-            HeaderUI()
             UserUIMainBody()
+            HeaderUI()
         }
     }
 }
@@ -25,33 +25,34 @@ struct UserMainUI_Previews: PreviewProvider {
 }
 
 struct HeaderUI: View{
+    @ObservedObject var currentUser = UserData()
     var body: some View{
         ZStack{
-            RoundedRectangle(cornerRadius: 13)
-                .frame(width: 390, height: 130, alignment: .center)
-            VStack(spacing: 15){
-                RoundedRectangle(cornerRadius: 0)
-                    .frame(width: 390, height: 1, alignment: .center)
-                    .foregroundColor(Color.gray)
+            RoundedRectangle(cornerRadius: 0)
+                .frame(width: 390, height: 100, alignment: .center)
+            VStack(){
+                Spacer()
+                    .frame(width: 390, height: 40, alignment: .center)
                 HStack{
-                    Image(systemName: "person.fill")
-                        .foregroundColor(Color.white)
-                        .font(.system(size: 40))
-                        .frame(width: 45, height: 50, alignment: .leading)
-                    VStack(alignment: .leading){
-                        Text("nickname")
-                        Text("#tags")
+                    HStack{
+                        Image(systemName: "person.crop.circle")
+                            .font(.system(size: 30))
+                            .foregroundColor(CurrentColors.green)
+                        VStack(alignment: .leading){
+                            Text(currentUser.name)
+                                .foregroundColor(CurrentColors.white)
+                            Text("#tags")
+                                .foregroundColor(CurrentColors.lightGreen)
+                        }
                     }
-                    Spacer()
-                    Image(systemName: "gear")
-                        .font(.system(size: 40))
+                    .frame(width: 320, height: 50, alignment: .leading)
+                    Image(systemName: "gearshape")
+                        .font(.system(size: 30))
+                        .foregroundColor(CurrentColors.green)
                 }
-                .frame(width: 365, height: 50, alignment: .leading)
-                .foregroundColor(Color.white)
             }
-            .frame(width: 390, height: 90, alignment: .bottom)
         }
-        .position(x: 195, y: 15)
+        .position(x: 195, y: 0)
     }
 }
 
@@ -71,12 +72,22 @@ struct BottomMenu: View{
 
 struct UserUIMainBody: View{
     
+    init(){
+        UITabBar.appearance().backgroundColor = .black
+        UITabBar.appearance().unselectedItemTintColor = UIColor(CurrentColors.darkGreen)
+    }
+    
     var body: some View{
         TabView{
-            Text("a")
-                .tabItem{
-                    Image(systemName: "bubble.left")
-                }
+            ZStack{
+                RoundedRectangle(cornerRadius: 0)
+                    .foregroundColor(CurrentColors.gray)
+                    .edgesIgnoringSafeArea(.all)
+                Text("a")
+            }
+            .tabItem{
+                Image(systemName: "bubble.left")
+            }
             Text("b")
                 .tabItem{
                     Image(systemName: "person.2")
@@ -90,7 +101,7 @@ struct UserUIMainBody: View{
                     Image(systemName: "folder")
                 }
         }
-        .accentColor(.green)
+        .accentColor(CurrentColors.green)
     }
 }
 struct ChatMenu: View{
@@ -99,3 +110,5 @@ struct ChatMenu: View{
             .frame(width: 390, height: 80, alignment: .center)
     }
 }
+
+

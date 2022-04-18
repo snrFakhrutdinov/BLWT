@@ -8,5 +8,7 @@
 import Foundation
 
 class UserData: ObservableObject{
-    @Published var name:String = ""
+    @Published var name: String = ""
+    @Published var login:String = ""
+    
 }
