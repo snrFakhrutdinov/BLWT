@@ -9,23 +9,33 @@ import SwiftUI
 import UIKit
 
 struct UserMainUI: View {
-    @ObservedObject var data = UserData()
+    var userLogin: String
+    var userID: Int
+    @State var currentUser: User
+    
+    init(userName: String, id: Int){
+        self.userLogin = userName
+        self.userID = id
+        currentUser = User(name: self.userLogin, id: self.userID)
+    }
     var body: some View {
         ZStack{
-            UserUIMainBody()
-            HeaderUI()
+            UserUIMainBody(user: $currentUser)
+            HeaderUI(name: userLogin, id: userID)
         }
     }
 }
 
 struct UserMainUI_Previews: PreviewProvider {
     static var previews: some View {
-        UserMainUI()
+        UserMainUI(userName: "a", id: 1)
     }
 }
 
 struct HeaderUI: View{
     @ObservedObject var currentUser = UserData()
+    var name:String
+    var id: Int
     var body: some View{
         ZStack{
             RoundedRectangle(cornerRadius: 0)
@@ -39,7 +49,7 @@ struct HeaderUI: View{
                             .font(.system(size: 30))
                             .foregroundColor(CurrentColors.green)
                         VStack(alignment: .leading){
-                            Text(currentUser.name)
+                            Text(name)
                                 .foregroundColor(CurrentColors.white)
                             Text("#tags")
                                 .foregroundColor(CurrentColors.lightGreen)
@@ -71,6 +81,7 @@ struct BottomMenu: View{
 }
 
 struct UserUIMainBody: View{
+    @Binding var user:User
     
     init(){
         UITabBar.appearance().backgroundColor = .black
@@ -79,16 +90,11 @@ struct UserUIMainBody: View{
     
     var body: some View{
         TabView{
-            ZStack{
-                RoundedRectangle(cornerRadius: 0)
-                    .foregroundColor(CurrentColors.gray)
-                    .edgesIgnoringSafeArea(.all)
-                Text("a")
-            }
+            ChatMenu()
             .tabItem{
                 Image(systemName: "bubble.left")
             }
-            Text("b")
+            FriendView(user: user)
                 .tabItem{
                     Image(systemName: "person.2")
                 }
@@ -106,9 +112,62 @@ struct UserUIMainBody: View{
 }
 struct ChatMenu: View{
     var body: some View{
-        RoundedRectangle(cornerRadius: 8)
-            .frame(width: 390, height: 80, alignment: .center)
+        VStack{
+            Button("New Chat"){
+                print("Process")
+            }
+            .frame(width: 390, height: 25, alignment: .center)
+            .foregroundColor(Color.white)
+            .background(CurrentColors.green)
+        }
+        .frame(width: 390, height: 615, alignment: .topLeading)
     }
 }
 
+struct ChatValuableElement: View{
+    
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(sortDescriptors: []) var users: FetchedResults<Users>
+    
+    var userName:String
+    var body: some View{
+        Button(action: {
+            print("Sending")
+        }, label: {
+            ZStack{
+                RoundedRectangle(cornerRadius: 0)
+                    .foregroundColor(.black)
+                    .frame(width: 390, height: 60)
+                HStack{
+                    Image(systemName: "person.circle.fill")
+                        .font(.system(size: 35))
+                    VStack(alignment: .leading, spacing: 0){
+                        Text(userName)
+                            .fontWeight(.bold)
+                        Text("#tags")
+                            .foregroundColor(CurrentColors.lightGreen)
+                    }
+                }
+                .frame(width: 375, alignment: .leading)
+            }
+        })
+    }
+}
 
+struct FriendList: View{
+    @State var user:User
+    var body: some View{
+        ForEach(0..<user.friends.count){ friend in
+            VStack{
+                Text("Friend: \(friend)")
+            }
+        }
+    }
+}
+    
+struct FriendView: View{
+    @State var user: User
+    var body: some View{
+        Text("a")
+    }
+}

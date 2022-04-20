@@ -12,3 +12,4 @@ class DataController: ObservableObject{
         }
     }
 }
+

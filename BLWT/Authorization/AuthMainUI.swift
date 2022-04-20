@@ -19,11 +19,11 @@ struct AuthMainUI: View {
     }
 }
 
-struct AuthMainUI_Previews: PreviewProvider {
-    static var previews: some View {
-        AuthMainUI()
-    }
-}
+//struct AuthMainUI_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AuthMainUI()
+//    }
+//}
 
 struct SwipedRegBody: View{
     @Environment(\.managedObjectContext) var moc
@@ -37,7 +37,9 @@ struct SwipedRegBody: View{
     @State var isRegistered: Bool = false
     
     @ObservedObject var currentUser = UserData()
+    @Binding var isAccepted: Bool
     
+    @State var id:Int = 0
     var body: some View{
         NavigationView{
             ZStack(){
@@ -142,7 +144,8 @@ struct SwipedRegBody: View{
                             .foregroundColor(CurrentColors.green)
                             .frame(width: 320, height: 24, alignment: .leading)
                         //add A Navigation link here
-                        NavigationLink(destination: UserMainUI(), isActive: $isRegistered){EmptyView()}
+                        NavigationLink(destination: UserMainUI(userName: loginRegContainer, id: self.id)
+                            .navigationBarBackButtonHidden(true), isActive: $isRegistered){EmptyView()}
                         Button(action: {
                             for userInDB in users {
                                 if userInDB.login == loginRegContainer{
@@ -163,8 +166,8 @@ struct SwipedRegBody: View{
                                 newUser.id = UUID()
                                 currentUser.name = loginRegContainer
                                 try moc.save()
+                                self.id = newUser.id!.hashValue
                                 isRegistered = true
-                                
                                 print("newUser is added")
                             } catch{
                                 print(error)
@@ -191,6 +194,7 @@ struct SwipedLogBody: View{
     @ObservedObject var data = UserData()
     @State var isLoggined: Bool = false
     
+    @State var id:Int = 0
     var body: some View{
         NavigationView{
             ZStack(){
@@ -253,13 +257,14 @@ struct SwipedLogBody: View{
                         RoundedRectangle(cornerRadius: 13)
                             .foregroundColor(CurrentColors.green)
                             .frame(width: 320, height: 24, alignment: .leading)
-                        NavigationLink(destination: UserMainUI(), isActive: $isLoggined){ EmptyView() }
+                        NavigationLink(destination: UserMainUI(userName: firstLogContainer, id: self.id)                            .navigationBarBackButtonHidden(true), isActive: $isLoggined){ EmptyView() }
                         Button(action: {
                             for userInDB in users{
                                 if userInDB.login == firstLogContainer && userInDB.password == secondLogContainer{
                                     print("Logged")
                                     data.name = firstLogContainer
                                     isLoggined = true
+                                    self.id = userInDB.id!.hashValue
                                 }
                             }
                         }, label: {
@@ -282,9 +287,11 @@ struct MainBody: View{
         UITabBar.appearance().unselectedItemTintColor = UIColor(CurrentColors.darkGreen)
     }
     
+    @State private var isAccepted: Bool = false
+    
     var body: some View{
                 TabView{
-                    SwipedRegBody()
+                    SwipedRegBody(isAccepted: $isAccepted)
                         .tabItem{
                             Image(systemName: "person.crop.circle.fill.badge.plus")
                                 .font(.system(size: 50))

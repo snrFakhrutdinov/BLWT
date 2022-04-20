@@ -21,6 +21,7 @@
 		7D76D2BC2801FD1700C5746D /* UsersDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D76D2BA2801FD1700C5746D /* UsersDB.xcdatamodeld */; };
 		7D8B92132805B90B00B69BE1 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8B92122805B90B00B69BE1 /* CurrentUser.swift */; };
 		7D980F03280349D900724CE3 /* UserDBList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D980F02280349D900724CE3 /* UserDBList.swift */; };
+		7DA82D5E2810584C00D6D559 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA82D5D2810584C00D6D559 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		7D76D2BB2801FD1700C5746D /* UsersDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UsersDB.xcdatamodel; sourceTree = "<group>"; };
 		7D8B92122805B90B00B69BE1 /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		7D980F02280349D900724CE3 /* UserDBList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDBList.swift; sourceTree = "<group>"; };
+		7DA82D5D2810584C00D6D559 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 		7D76D2792801E60F00C5746D /* BLWT */ = {
 			isa = PBXGroup;
 			children = (
+				7DB10B5B280EF8F9000675C0 /* Chat */,
 				7D76D2B32801FBE200C5746D /* CoreData */,
 				7D76D2B22801FB7B00C5746D /* Authorization */,
 				7D76D2B02801F19C00C5746D /* Library */,
@@ -155,6 +158,7 @@
 		7D76D2B12801FB6400C5746D /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				7DA82D5D2810584C00D6D559 /* User.swift */,
 				7D76D27A2801E60F00C5746D /* BLWTApp.swift */,
 				7D76D27C2801E60F00C5746D /* ContentView.swift */,
 				7D1C20342804744400640C2E /* UserMainUI.swift */,
@@ -178,6 +182,13 @@
 				7D76D2B42801FBFD00C5746D /* BDController.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		7DB10B5B280EF8F9000675C0 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Chat;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,6 +329,7 @@
 				7D1C20352804744400640C2E /* UserMainUI.swift in Sources */,
 				7D76D2A92801E8D700C5746D /* AuthMainUI.swift in Sources */,
 				7D8B92132805B90B00B69BE1 /* CurrentUser.swift in Sources */,
+				7DA82D5E2810584C00D6D559 /* User.swift in Sources */,
 				7D76D27B2801E60F00C5746D /* BLWTApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
