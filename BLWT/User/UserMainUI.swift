@@ -9,33 +9,26 @@ import SwiftUI
 import UIKit
 
 struct UserMainUI: View {
-    var userLogin: String
-    var userID: Int
-    @State var currentUser: User
+    @StateObject var viewRouter: ViewRouter
     
-    init(userName: String, id: Int){
-        self.userLogin = userName
-        self.userID = id
-        currentUser = User(name: self.userLogin, id: self.userID)
-    }
+    @StateObject var userData: UserData
+    
     var body: some View {
         ZStack{
-            UserUIMainBody(user: $currentUser)
-            HeaderUI(name: userLogin, id: userID)
+            UserUIMainBody()
+            HeaderUI(userData: userData)
         }
     }
 }
 
 struct UserMainUI_Previews: PreviewProvider {
     static var previews: some View {
-        UserMainUI(userName: "a", id: 1)
+        UserMainUI(viewRouter: ViewRouter(), userData: UserData())
     }
 }
 
 struct HeaderUI: View{
-    @ObservedObject var currentUser = UserData()
-    var name:String
-    var id: Int
+    @StateObject var userData: UserData
     var body: some View{
         ZStack{
             RoundedRectangle(cornerRadius: 0)
@@ -49,7 +42,7 @@ struct HeaderUI: View{
                             .font(.system(size: 30))
                             .foregroundColor(CurrentColors.green)
                         VStack(alignment: .leading){
-                            Text(name)
+                            Text(userData.name)
                                 .foregroundColor(CurrentColors.white)
                             Text("#tags")
                                 .foregroundColor(CurrentColors.lightGreen)
@@ -81,7 +74,6 @@ struct BottomMenu: View{
 }
 
 struct UserUIMainBody: View{
-    @Binding var user:User
     
     init(){
         UITabBar.appearance().backgroundColor = .black
@@ -94,7 +86,7 @@ struct UserUIMainBody: View{
             .tabItem{
                 Image(systemName: "bubble.left")
             }
-            FriendView(user: user)
+            Text("b")
                 .tabItem{
                     Image(systemName: "person.2")
                 }
@@ -151,23 +143,5 @@ struct ChatValuableElement: View{
                 .frame(width: 375, alignment: .leading)
             }
         })
-    }
-}
-
-struct FriendList: View{
-    @State var user:User
-    var body: some View{
-        ForEach(0..<user.friends.count){ friend in
-            VStack{
-                Text("Friend: \(friend)")
-            }
-        }
-    }
-}
-    
-struct FriendView: View{
-    @State var user: User
-    var body: some View{
-        Text("a")
     }
 }

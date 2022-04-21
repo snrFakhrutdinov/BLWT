@@ -8,13 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject var viewRouter: ViewRouter
+    @StateObject var userData: UserData
+    
     var body: some View {
-            AuthMainUI()
+        switch viewRouter.currentPage {
+        case .auth:
+            AuthMainUI(viewRouter: viewRouter, userData: userData)
+        case .userMain:
+            UserMainUI(viewRouter: viewRouter, userData: userData)
         }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(viewRouter: ViewRouter(), userData: UserData())
     }
 }

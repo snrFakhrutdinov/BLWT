@@ -9,10 +9,16 @@ import SwiftUI
 
 @main
 struct BLWTApp: App {
+    
     @StateObject private var dataController = DataController()
+    
+    @StateObject var viewRouter = ViewRouter()
+    
+    @StateObject var userData = UserData()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(viewRouter: viewRouter, userData: userData)
                 .environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }

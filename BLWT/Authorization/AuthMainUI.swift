@@ -9,21 +9,25 @@ import SwiftUI
 import UIKit
 
 struct AuthMainUI: View {
+    
+    @State var viewRouter: ViewRouter
+    @StateObject var userData: UserData
+    
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 0)
                 .edgesIgnoringSafeArea(.all)
                 .foregroundColor(Color.gray)
-                MainBody()
+            MainBody(viewRouter: viewRouter, userData: userData)
         }
     }
 }
 
-//struct AuthMainUI_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AuthMainUI()
-//    }
-//}
+struct AuthMainUI_Previews: PreviewProvider {
+    static var previews: some View {
+        AuthMainUI(viewRouter: ViewRouter(), userData: UserData())
+    }
+}
 
 struct SwipedRegBody: View{
     @Environment(\.managedObjectContext) var moc
@@ -36,10 +40,14 @@ struct SwipedRegBody: View{
     
     @State var isRegistered: Bool = false
     
-    @ObservedObject var currentUser = UserData()
-    @Binding var isAccepted: Bool
+    @StateObject var viewRouter: ViewRouter
     
-    @State var id:Int = 0
+    @StateObject var userData:UserData
+    
+    @State var isShowedLoginErrorAlert: Bool = false
+    @State var isShowedUserBeenErrorAlert: Bool = false
+    @State var isShowedPasswordErrorAlert: Bool = false
+    
     var body: some View{
         NavigationView{
             ZStack(){
@@ -143,18 +151,19 @@ struct SwipedRegBody: View{
                         RoundedRectangle(cornerRadius: 13)
                             .foregroundColor(CurrentColors.green)
                             .frame(width: 320, height: 24, alignment: .leading)
-                        //add A Navigation link here
-                        NavigationLink(destination: UserMainUI(userName: loginRegContainer, id: self.id)
-                            .navigationBarBackButtonHidden(true), isActive: $isRegistered){EmptyView()}
                         Button(action: {
                             for userInDB in users {
                                 if userInDB.login == loginRegContainer{
                                     print(loginRegContainer)
-                                    print("Error: this login is already in use")
+                                    isShowedUserBeenErrorAlert = true
                                     return
                                 }
                             }
+                            if(loginRegContainer == "" || emailRegContainer == "" || passwordRegContainer == "" ){
+                                isShowedLoginErrorAlert = true
+                            }
                             if passwordRegContainer != confirmRegContainer {
+                                isShowedPasswordErrorAlert = true
                                 print("Error: your password is not match")
                                 return
                             }
@@ -164,10 +173,10 @@ struct SwipedRegBody: View{
                                 newUser.email = emailRegContainer
                                 newUser.password = passwordRegContainer
                                 newUser.id = UUID()
-                                currentUser.name = loginRegContainer
                                 try moc.save()
-                                self.id = newUser.id!.hashValue
-                                isRegistered = true
+                                userData.name = loginRegContainer
+                                userData.id = newUser.id.hashValue
+                                viewRouter.currentPage = .userMain
                                 print("newUser is added")
                             } catch{
                                 print(error)
@@ -176,6 +185,15 @@ struct SwipedRegBody: View{
                             Text("Register")
                                 .foregroundColor(Color.white)
                                 .fontWeight(.bold)
+                        })
+                        .alert("Your field is empty", isPresented:$isShowedLoginErrorAlert, actions: {
+                            Button("OK", role: .cancel){ }
+                        })
+                        .alert("This User is already register", isPresented:$isShowedUserBeenErrorAlert, actions: {
+                            Button("OK", role: .cancel){ }
+                        })
+                        .alert("Passwords don't match", isPresented:$isShowedPasswordErrorAlert, actions: {
+                            Button("OK", role: .cancel){ }
                         })
                     }
                 }
@@ -191,10 +209,12 @@ struct SwipedLogBody: View{
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: []) var users: FetchedResults<Users>
     
-    @ObservedObject var data = UserData()
-    @State var isLoggined: Bool = false
+    @StateObject var viewRouter: ViewRouter
     
-    @State var id:Int = 0
+    @StateObject var userData: UserData
+    
+    @State var isShowedAlert: Bool = false
+    
     var body: some View{
         NavigationView{
             ZStack(){
@@ -257,20 +277,25 @@ struct SwipedLogBody: View{
                         RoundedRectangle(cornerRadius: 13)
                             .foregroundColor(CurrentColors.green)
                             .frame(width: 320, height: 24, alignment: .leading)
-                        NavigationLink(destination: UserMainUI(userName: firstLogContainer, id: self.id)                            .navigationBarBackButtonHidden(true), isActive: $isLoggined){ EmptyView() }
                         Button(action: {
                             for userInDB in users{
                                 if userInDB.login == firstLogContainer && userInDB.password == secondLogContainer{
                                     print("Logged")
-                                    data.name = firstLogContainer
-                                    isLoggined = true
-                                    self.id = userInDB.id!.hashValue
+                                    userData.name = firstLogContainer
+                                    userData.id = userInDB.id.hashValue
+                                    viewRouter.currentPage = .userMain
+                                }
+                                else{
+                                    isShowedAlert = true
                                 }
                             }
                         }, label: {
                             Text("Login")
                                 .foregroundColor(Color.white)
                                 .fontWeight(.bold)
+                        })
+                        .alert("Incorect Data ", isPresented: $isShowedAlert, actions: {
+                            Button("OK", role: .cancel){ }
                         })
                     }
                 }
@@ -282,21 +307,19 @@ struct SwipedLogBody: View{
 
 struct MainBody: View{
     
-    init(){
-        UITabBar.appearance().backgroundColor = UIColor(Color.black)
-        UITabBar.appearance().unselectedItemTintColor = UIColor(CurrentColors.darkGreen)
-    }
     
-    @State private var isAccepted: Bool = false
+    @StateObject var viewRouter: ViewRouter
+    
+    @StateObject var userData: UserData
     
     var body: some View{
                 TabView{
-                    SwipedRegBody(isAccepted: $isAccepted)
+                    SwipedRegBody(viewRouter: viewRouter, userData: userData)
                         .tabItem{
                             Image(systemName: "person.crop.circle.fill.badge.plus")
                                 .font(.system(size: 50))
                         }
-                    SwipedLogBody()
+                    SwipedLogBody(viewRouter: viewRouter, userData: userData)
                         .tabItem{
                             Image(systemName: "person.crop.circle.badge.questionmark.fill")
                                 .font(.system(size: 50))
@@ -304,6 +327,7 @@ struct MainBody: View{
                 }
                 .accentColor(CurrentColors.green)
                 .shadow(radius: 10)
+                .background(.black)
     }
 }
 
