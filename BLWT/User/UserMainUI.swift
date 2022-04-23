@@ -15,8 +15,8 @@ struct UserMainUI: View {
     
     var body: some View {
         ZStack{
-            UserUIMainBody()
-            HeaderUI(userData: userData)
+//            UserUIMainBody()
+            ActualChatView()
         }
     }
 }
@@ -86,62 +86,71 @@ struct UserUIMainBody: View{
             .tabItem{
                 Image(systemName: "bubble.left")
             }
-            Text("b")
+            Text("INFO")
                 .tabItem{
-                    Image(systemName: "person.2")
-                }
-            Text("c")
-                .tabItem{
-                    Image(systemName: "rectangle.stack.badge.person.crop")
-                }
-            Text("d")
-                .tabItem{
-                    Image(systemName: "folder")
+                    Image(systemName: "person.text.rectangle")
                 }
         }
         .accentColor(CurrentColors.green)
     }
 }
+
 struct ChatMenu: View{
     var body: some View{
-        VStack{
-            Button("New Chat"){
-                print("Process")
+        ZStack{
+            RoundedRectangle(cornerRadius: 0)
+                .foregroundColor(CurrentColors.gray)
+            
+            VStack{
+                Button("Enter chat"){
+                    print("Process")
+                }
+                .frame(width: 390, height: 50, alignment: .center)
+                .foregroundColor(Color.white)
+                .background(CurrentColors.green)
             }
-            .frame(width: 390, height: 25, alignment: .center)
-            .foregroundColor(Color.white)
-            .background(CurrentColors.green)
         }
-        .frame(width: 390, height: 615, alignment: .topLeading)
     }
 }
 
-struct ChatValuableElement: View{
-    
-    @Environment(\.managedObjectContext) var moc
-    @FetchRequest(sortDescriptors: []) var users: FetchedResults<Users>
-    
-    var userName:String
+struct ActualChatView: View{
+    @State var container:String = ""
+    @State var isPressed: Bool = false
     var body: some View{
-        Button(action: {
-            print("Sending")
-        }, label: {
-            ZStack{
-                RoundedRectangle(cornerRadius: 0)
-                    .foregroundColor(.black)
-                    .frame(width: 390, height: 60)
-                HStack{
-                    Image(systemName: "person.circle.fill")
-                        .font(.system(size: 35))
-                    VStack(alignment: .leading, spacing: 0){
-                        Text(userName)
-                            .fontWeight(.bold)
-                        Text("#tags")
-                            .foregroundColor(CurrentColors.lightGreen)
+        ZStack{
+            RoundedRectangle(cornerRadius: 0)
+                .frame(width: 390, height: 85)
+            VStack(spacing: -25){
+                HStack(spacing: 5){
+                    ZStack{
+                        RoundedRectangle(cornerRadius: 12)
+                            .frame(width: 345, height: 25, alignment: .top)
+                            .foregroundColor(CurrentColors.gray)
+                        TextField(text: $container, label:{
+                            Text("")
+                        })
+                        .foregroundColor(Color.white)
+                        .placeholder(when: container.isEmpty, placeholder: {
+                            Text("Enter here....")
+                                .foregroundColor(CurrentColors.green)
+                                .frame(width: 345, height: 25, alignment: .center)
+                        })
                     }
+                    Button(action: {
+                    }, label: {
+                        Image(systemName: "paperplane")
+                            .font(.system(size: 24))
+                            .foregroundColor(CurrentColors.green)
+                    })
                 }
-                .frame(width: 375, alignment: .leading)
+                .frame(width: 390, height: 65, alignment: .top)
+                Text("BLWT")
+                    .foregroundColor(CurrentColors.green)
+                    .fontWeight(.bold)
+                    .frame(width: 390, height: 30, alignment: .center)
             }
-        })
+        }
+        .frame(width: 390, height: 835, alignment: .bottom)
     }
 }
+
