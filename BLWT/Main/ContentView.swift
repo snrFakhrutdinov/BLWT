@@ -18,6 +18,8 @@ struct ContentView: View {
             AuthMainUI(viewRouter: viewRouter, userData: userData)
         case .userMain:
             UserMainUI(viewRouter: viewRouter, userData: userData)
+        case .chat:
+            ActualChatView()
         }
     }
 }

@@ -10,4 +10,5 @@ import Foundation
 enum Pages{
     case auth
     case userMain
+    case chat
 }

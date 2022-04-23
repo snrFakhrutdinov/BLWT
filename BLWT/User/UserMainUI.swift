@@ -15,8 +15,8 @@ struct UserMainUI: View {
     
     var body: some View {
         ZStack{
-//            UserUIMainBody()
-            ActualChatView()
+            UserUIMainBody(viewRouter: viewRouter, user: userData)
+            HeaderUI(userData: userData)
         }
     }
 }
@@ -75,14 +75,16 @@ struct BottomMenu: View{
 
 struct UserUIMainBody: View{
     
-    init(){
-        UITabBar.appearance().backgroundColor = .black
-        UITabBar.appearance().unselectedItemTintColor = UIColor(CurrentColors.darkGreen)
-    }
-    
+//    init(){
+//        UITabBar.appearance().backgroundColor = .black
+//        UITabBar.appearance().unselectedItemTintColor = UIColor(CurrentColors.darkGreen)
+//
+//    }
+    @StateObject var viewRouter:ViewRouter
+    @StateObject var user:UserData
     var body: some View{
         TabView{
-            ChatMenu()
+            ChatMenu(user: user, router: viewRouter)
             .tabItem{
                 Image(systemName: "bubble.left")
             }
@@ -96,6 +98,10 @@ struct UserUIMainBody: View{
 }
 
 struct ChatMenu: View{
+    var user:UserData
+    let chatRoom = ChatRoom()
+    
+    @StateObject var router: ViewRouter
     var body: some View{
         ZStack{
             RoundedRectangle(cornerRadius: 0)
@@ -116,41 +122,64 @@ struct ChatMenu: View{
 struct ActualChatView: View{
     @State var container:String = ""
     @State var isPressed: Bool = false
+    
+    @StateObject var user: UserData = UserData()
+    @State var messages: [Message] = []
+    
+    let chatRoom = ChatRoom()
     var body: some View{
-        ZStack{
-            RoundedRectangle(cornerRadius: 0)
-                .frame(width: 390, height: 85)
-            VStack(spacing: -25){
-                HStack(spacing: 5){
-                    ZStack{
-                        RoundedRectangle(cornerRadius: 12)
-                            .frame(width: 345, height: 25, alignment: .top)
-                            .foregroundColor(CurrentColors.gray)
-                        TextField(text: $container, label:{
-                            Text("")
-                        })
-                        .foregroundColor(Color.white)
-                        .placeholder(when: container.isEmpty, placeholder: {
-                            Text("Enter here....")
+        VStack{
+            ScrollView{
+                ForEach(messages, id: \.self){ message in
+                    Text(message.message)
+                        .foregroundColor(Color.black)
+                }
+            }
+            ZStack{
+                RoundedRectangle(cornerRadius: 0)
+                    .frame(width: 390, height: 85)
+                VStack(spacing: -25){
+                    HStack(spacing: 5){
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 12)
+                                .frame(width: 345, height: 25, alignment: .top)
+                                .foregroundColor(CurrentColors.gray)
+                            TextField(text: $container, label:{
+                                Text("")
+                            })
+                            .foregroundColor(Color.white)
+                            .placeholder(when: container.isEmpty, placeholder: {
+                                Text("Enter here....")
+                                    .foregroundColor(CurrentColors.green)
+                                    .frame(width: 345, height: 25, alignment: .center)
+                            })
+                        }
+                        Button(action: {
+                            if(container.isEmpty){
+                                return
+                            }
+//                            chatRoom.send(message: container)
+                            var msg = Message(message: container, messageSender: .ourself, username: user.name)
+                            print(msg.message)
+                            messages.append(msg)
+                            
+                            
+                        }, label: {
+                            Image(systemName: "paperplane")
+                                .font(.system(size: 24))
                                 .foregroundColor(CurrentColors.green)
-                                .frame(width: 345, height: 25, alignment: .center)
                         })
                     }
-                    Button(action: {
-                    }, label: {
-                        Image(systemName: "paperplane")
-                            .font(.system(size: 24))
-                            .foregroundColor(CurrentColors.green)
-                    })
+                    .frame(width: 390, height: 65, alignment: .top)
+                    Text("BLWT")
+                        .foregroundColor(CurrentColors.green)
+                        .fontWeight(.bold)
+                        .frame(width: 390, height: 30, alignment: .center)
                 }
-                .frame(width: 390, height: 65, alignment: .top)
-                Text("BLWT")
-                    .foregroundColor(CurrentColors.green)
-                    .fontWeight(.bold)
-                    .frame(width: 390, height: 30, alignment: .center)
             }
+            .frame(width: 390, height: 835, alignment: .bottom)
         }
-        .frame(width: 390, height: 835, alignment: .bottom)
     }
 }
+
 

@@ -23,6 +23,9 @@
 		7D9FECCF28118A7A00600F1B /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9FECCE28118A7A00600F1B /* Page.swift */; };
 		7D9FECD228118C4900600F1B /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9FECD128118C4900600F1B /* ViewRouter.swift */; };
 		7D9FECD5281197BD00600F1B /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9FECD4281197BD00600F1B /* UserData.swift */; };
+		7DA0AF6128143F60004D3BA8 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA0AF6028143F60004D3BA8 /* ChatRoom.swift */; };
+		7DA0AF65281444AA004D3BA8 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA0AF64281444AA004D3BA8 /* Message.swift */; };
+		7DA0AF6728145A36004D3BA8 /* MIV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA0AF6628145A36004D3BA8 /* MIV.swift */; };
 		7DA82D5E2810584C00D6D559 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA82D5D2810584C00D6D559 /* User.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +66,9 @@
 		7D9FECCE28118A7A00600F1B /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		7D9FECD128118C4900600F1B /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
 		7D9FECD4281197BD00600F1B /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		7DA0AF6028143F60004D3BA8 /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
+		7DA0AF64281444AA004D3BA8 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		7DA0AF6628145A36004D3BA8 /* MIV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIV.swift; sourceTree = "<group>"; };
 		7DA82D5D2810584C00D6D559 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,6 +120,7 @@
 		7D76D2792801E60F00C5746D /* BLWT */ = {
 			isa = PBXGroup;
 			children = (
+				7DA0AF5928143B22004D3BA8 /* Message */,
 				7D9FECD3281197A200600F1B /* User */,
 				7D9FECD028118C3900600F1B /* ViewRouter */,
 				7D9FECCB28118A3400600F1B /* ViewRouterHelper */,
@@ -214,9 +221,19 @@
 			path = User;
 			sourceTree = "<group>";
 		};
+		7DA0AF5928143B22004D3BA8 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				7DA0AF64281444AA004D3BA8 /* Message.swift */,
+				7DA0AF6628145A36004D3BA8 /* MIV.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
 		7DB10B5B280EF8F9000675C0 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				7DA0AF6028143F60004D3BA8 /* ChatRoom.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -361,7 +378,10 @@
 				7D1C20352804744400640C2E /* UserMainUI.swift in Sources */,
 				7D9FECCF28118A7A00600F1B /* Page.swift in Sources */,
 				7D76D2A92801E8D700C5746D /* AuthMainUI.swift in Sources */,
+				7DA0AF6728145A36004D3BA8 /* MIV.swift in Sources */,
+				7DA0AF6128143F60004D3BA8 /* ChatRoom.swift in Sources */,
 				7DA82D5E2810584C00D6D559 /* User.swift in Sources */,
+				7DA0AF65281444AA004D3BA8 /* Message.swift in Sources */,
 				7D76D27B2801E60F00C5746D /* BLWTApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
